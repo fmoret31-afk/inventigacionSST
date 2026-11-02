@@ -4,228 +4,566 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Accidentes - RM 050-2013-TR</title>
+    <!-- FontAwesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; color: #000; background-color: #f4f4f4;}
-        .container { max-width: 1000px; margin: 0 auto; border: 2px solid #000; padding: 15px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
-        h1 { text-align: center; font-size: 16px; text-transform: uppercase; margin-bottom: 5px; }
-        .header-top { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; }
-        fieldset { border: 1px solid #666; margin-bottom: 10px; padding: 10px; }
-        legend { font-weight: bold; color: #fff; background-color: #333; padding: 3px 8px; font-size: 12px; }
-        .row { display: flex; flex-wrap: wrap; margin-bottom: 5px; }
-        .col { flex: 1; min-width: 150px; padding: 2px 5px; display: flex; align-items: center; }
-        .col label { font-weight: bold; margin-right: 5px; white-space: nowrap; }
-        input[type="text"], input[type="date"], input[type="time"], input[type="number"], select {
-            width: 100%; border: none; border-bottom: 1px solid #000; background: transparent; font-family: Arial; font-size: 12px; padding: 2px;
+        /* VARIABLES DE COLOR Y ESTILOS GENERALES */
+        :root {
+            --primary: #3b82f6;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --info: #06b6d4;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --bg-body: #f3f4f6;
         }
-        input:focus, select:focus { outline: none; border-bottom: 2px solid #4a86e8; background-color: #f0f8ff; }
-        textarea { width: 100%; height: 80px; border: 1px solid #000; font-family: Arial; font-size: 12px; padding: 5px; resize: vertical; }
-        .checkbox-group { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; margin-top: 5px;}
-        table { width: 100%; border-collapse: collapse; margin-top: 5px; }
-        th, td { border: 1px solid #000; padding: 5px; text-align: left; font-size: 11px; }
-        th { background-color: #e0e0e0; text-align: center; }
-        .btn-container { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-        .btn { padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; border-radius: 5px; color: white; transition: 0.3s;}
-        .btn-save { background-color: #4a86e8; }
-        .btn-save:hover { background-color: #3b6ebf; }
-        .btn-print { background-color: #28a745; }
-        .btn-print:hover { background-color: #218838; }
-        .btn-clear { background-color: #dc3545; }
-        .btn-clear:hover { background-color: #c82333; }
+
+        /* APLICANDO LA NUEVA TIPOGRAFÍA INTER */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            font-size: 12px; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: var(--bg-body); 
+            color: #000; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; background-color: #fff; padding: 25px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); border-radius: 8px;}
+        
+        /* ESTILOS EXACTOS DE EXCEL (TABLAS Y CELDAS) */
+        .excel-table { width: 100%; border-collapse: collapse; margin-bottom: -1px; table-layout: fixed; border: 1px solid #000; }
+        .excel-table th, .excel-table td { border: 1px solid #000; padding: 6px 4px; vertical-align: middle; text-align: center; }
+        
+        .excel-table th { background-color: #e5e7eb; font-weight: 600; font-size: 10px; text-transform: uppercase; letter-spacing: 0.3px;}
+        .section-title { background-color: #d1d5db !important; font-weight: 700; text-align: left !important; font-size: 11px; padding: 8px !important; }
+        .sub-section { background-color: #f9fafb !important; font-size: 9px; font-weight: 500; text-align: left !important; padding: 5px 8px !important; color: #4b5563; }
+        
+        /* INPUTS CON TIPOGRAFÍA MEJORADA */
+        input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select {
+            width: 100%; border: none; background: transparent; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 500; box-sizing: border-box; text-align: center; padding: 4px; min-height: 24px; color: #111827;
+        }
+        input:focus, textarea:focus { outline: 2px solid var(--primary); background-color: #eff6ff; border-radius: 2px; }
+        textarea { text-align: left; resize: vertical; min-height: 80px; line-height: 1.5; font-weight: 400;}
+        
+        .input-left { text-align: left !important; padding-left: 8px; }
+        
+        /* TEXTOS DE AYUDA (CONCEPTO) */
+        .concepto { font-size: 9px; color: var(--gray); font-style: italic; display: block; margin-top: 3px; text-align: left; border-top: 1px dotted #d1d5db; padding-top: 3px; font-weight: 400;}
+
+        /* =========================================
+           BOTONES ELEGANTES
+           ========================================= */
+        .btn-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 30px 0; }
+        
+        .btn { 
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 10px 24px; font-size: 14px; font-weight: 600; cursor: pointer; 
+            border: none; border-radius: 8px; color: white; transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-family: 'Inter', sans-serif;
+        }
+        .btn i { font-size: 16px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.2); filter: brightness(1.1); }
+        .btn:active { transform: translateY(0); }
+        
+        .btn-save { background-color: var(--success); }
+        .btn-print { background-color: var(--primary); }
+        .btn-clear { background-color: var(--danger); }
+        .btn-update { background-color: var(--info); }
+
+        /* =========================================
+           SECCIÓN DE HISTORIAL (DISEÑO CARD ELEGANTE)
+           ========================================= */
+        .admin-section { margin-top: 50px; }
+        
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+        }
+
+        .card-header {
+            background-color: #f8fafc;
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title { margin: 0; font-size: 18px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+        .card-title i { color: var(--primary); }
+
+        .table-responsive { overflow-x: auto; padding: 20px; }
+
+        /* Tabla del Historial */
+        .admin-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 13px; }
+        .admin-table th, .admin-table td { padding: 14px 15px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+        
+        .admin-table th { 
+            background-color: var(--dark); 
+            color: white; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 11px;
+            letter-spacing: 0.5px;
+        }
+        .admin-table th:first-child { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+        .admin-table th:last-child { border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-right: none; }
+        
+        .admin-table tbody tr { transition: background-color 0.2s ease; }
+        .admin-table tbody tr:hover { background-color: #f1f5f9; }
+        .admin-table tbody tr:last-child td { border-bottom: none; }
+
+        /* Botones dentro de la tabla */
+        .action-btns { display: flex; gap: 8px; justify-content: center; }
+        
+        .btn-action {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 6px 14px; font-size: 12px; font-weight: 600; border: none; border-radius: 20px; cursor: pointer; transition: 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .btn-edit { background-color: #fef3c7; color: #b45309; }
+        .btn-edit:hover { background-color: #fde68a; }
+        .btn-del { background-color: #fee2e2; color: #b91c1c; }
+        .btn-del:hover { background-color: #fecaca; }
+
+        /* Mensaje vacío */
+        .empty-msg { text-align: center; color: var(--gray); font-style: italic; padding: 25px; font-weight: 500;}
+
+        /* IMPRESIÓN */
         @media print {
-            .btn-container { display: none; }
-            .container { border: none; padding: 0; box-shadow: none; }
-            body { background-color: #fff; margin: 0; }
+            body { background-color: #fff; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .btn-container, .admin-section { display: none; }
+            .concepto { display: none; }
+            .excel-table th { background-color: #e5e7eb !important; color: #000 !important; -webkit-print-color-adjust: exact; }
+            .section-title { background-color: #d1d5db !important; -webkit-print-color-adjust: exact; }
+            .sub-section { background-color: #f9fafb !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="header-top">
-        <div>Nº REGISTRO: <input type="text" name="NumRegistro" id="NumRegistro" style="width: 150px; font-weight: bold;" placeholder="Ej. 001"></div>
-        <div>Formato RM 050-2013-TR</div>
-    </div>
-    <h1>REGISTRO DE ACCIDENTES DE TRABAJO</h1>
-
+    
     <form id="formAccidente">
-        <fieldset>
-            <legend>DATOS DEL EMPLEADOR PRINCIPAL</legend>
-            <div class="row">
-                <div class="col" style="flex: 2;"><label>Razón Social:</label> <input type="text" name="RazonSocial"></div>
-                <div class="col"><label>RUC:</label> <input type="text" name="RUC"></div>
-            </div>
-            <div class="row">
-                <div class="col" style="flex: 3;"><label>Domicilio:</label> <input type="text" name="Domicilio"></div>
-                <div class="col" style="flex: 2;"><label>Actividad Económica:</label> <input type="text" name="ActividadEconomica"></div>
-                <div class="col"><label>Nº Trabajadores:</label> <input type="number" name="NumTrabajadores"></div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>DATOS DEL TRABAJADOR ACCIDENTADO</legend>
-            <div class="row">
-                <div class="col" style="flex: 3;"><label>Apellidos y Nombres:</label> <input type="text" name="ApellidosNombres"></div>
-                <div class="col"><label>DNI/CE:</label> <input type="text" name="DNI"></div>
-                <div class="col"><label>Edad:</label> <input type="number" name="Edad"></div>
-            </div>
-            <div class="row">
-                <div class="col"><label>Área:</label> <input type="text" name="Area"></div>
-                <div class="col"><label>Puesto:</label> <input type="text" name="Puesto"></div>
-                <div class="col"><label>Antigüedad:</label> <input type="text" name="Antiguedad"></div>
-                <div class="col"><label>Sexo:</label> <input type="text" name="Sexo" placeholder="F/M"></div>
-                <div class="col"><label>Turno:</label> <input type="text" name="Turno" placeholder="D/T/N"></div>
-            </div>
-            <div class="row">
-                <div class="col"><label>Contrato:</label> <input type="text" name="TipoContrato"></div>
-                <div class="col"><label>Experiencia:</label> <input type="text" name="Experiencia"></div>
-                <div class="col"><label>Horas Trabajadas:</label> <input type="number" name="HorasTrabajadas"></div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>INVESTIGACIÓN DEL ACCIDENTE DE TRABAJO</legend>
-            <div class="row">
-                <div class="col"><label>Fecha Accidente:</label> <input type="date" name="FechaAccidente"></div>
-                <div class="col"><label>Hora Accidente:</label> <input type="time" name="HoraAccidente"></div>
-                <div class="col" style="flex: 2;"><label>Lugar exacto:</label> <input type="text" name="LugarExacto"></div>
-            </div>
-            
-            <div style="margin-top: 10px; font-weight: bold;">GRAVEDAD DEL ACCIDENTE:</div>
-            <div class="row">
-                <div class="col" style="flex: 1;">
-                    <select name="Gravedad">
-                        <option value="">Seleccione...</option>
-                        <option value="Leve">Accidente Leve</option>
-                        <option value="Incapacitante">Accidente Incapacitante</option>
-                        <option value="Mortal">Accidente Mortal</option>
-                    </select>
-                </div>
-            </div>
-
-            <div style="margin-top: 5px; font-weight: bold;">GRADO INCAPACITANTE (Si aplica):</div>
-            <div class="checkbox-group">
-                <label><input type="checkbox" name="TotalTemporal" value="Sí"> Total Temporal</label>
-                <label><input type="checkbox" name="ParcialTemporal" value="Sí"> Parcial Temporal</label>
-                <label><input type="checkbox" name="ParcialPermanente" value="Sí"> Parcial Permanente</label>
-                <label><input type="checkbox" name="TotalPermanente" value="Sí"> Total Permanente</label>
-            </div>
-
-            <div class="row" style="margin-top: 10px;">
-                <div class="col"><label>Días Descanso Médico:</label> <input type="number" name="DiasDescanso"></div>
-                <div class="col"><label>Trabajadores Afectados:</label> <input type="number" name="TrabajadoresAfectados"></div>
-                <div class="col" style="flex: 2;"><label>Parte del cuerpo lesionado:</label> <input type="text" name="ParteCuerpo"></div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>DESCRIPCIÓN DEL ACCIDENTE DE TRABAJO</legend>
-            <textarea name="Descripcion" placeholder="Describa sólo los hechos comprobables..."></textarea>
-        </fieldset>
-
-        <fieldset>
-            <legend>DESCRIPCIÓN DE LAS CAUSAS QUE ORIGINARON EL ACCIDENTE</legend>
-            <textarea name="Causas" placeholder="Use el modelo de causalidad: Actos, Condiciones, Factores Personales, Factores de Trabajo, Fallas de Control..."></textarea>
-        </fieldset>
-
-        <fieldset>
-            <legend>MEDIDAS CORRECTIVAS</legend>
-            <table>
-                <thead>
-                    <tr>
-                        <th style="width: 50%;">DESCRIPCIÓN DE LA MEDIDA</th>
-                        <th style="width: 20%;">RESPONSABLE</th>
-                        <th style="width: 15%;">FECHA EJECUCIÓN</th>
-                        <th style="width: 15%;">ESTADO</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="text" name="Medida1_Desc" style="border:none; width:100%;"></td>
-                        <td><input type="text" name="Medida1_Resp" style="border:none; width:100%;"></td>
-                        <td><input type="date" name="Medida1_Fecha" style="border:none; width:100%;"></td>
-                        <td><input type="text" name="Medida1_Estado" style="border:none; width:100%;"></td>
-                    </tr>
-                    <tr>
-                        <td><input type="text" name="Medida2_Desc" style="border:none; width:100%;"></td>
-                        <td><input type="text" name="Medida2_Resp" style="border:none; width:100%;"></td>
-                        <td><input type="date" name="Medida2_Fecha" style="border:none; width:100%;"></td>
-                        <td><input type="text" name="Medida2_Estado" style="border:none; width:100%;"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </fieldset>
-
-        <fieldset>
-            <legend>RESPONSABLES DEL REGISTRO Y DE LA INVESTIGACIÓN</legend>
-            <div class="row">
-                <div class="col" style="flex: 2;"><label>Nombre:</label> <input type="text" name="Responsable"></div>
-                <div class="col" style="flex: 1;"><label>Cargo:</label> <input type="text" name="CargoResponsable"></div>
-                <div class="col"><label>Fecha:</label> <input type="date" name="FechaRegistro"></div>
-            </div>
-        </fieldset>
         
+        <!-- ENCABEZADO PRINCIPAL -->
+        <table class="excel-table" style="border-bottom: none;">
+            <tr>
+                <td colspan="12" style="border: none; text-align: center; padding: 10px 0;">
+                    <h2 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">REGISTRO DE ACCIDENTES DE TRABAJO</h2>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 1. DATOS DEL EMPLEADOR PRINCIPAL -->
+        <table class="excel-table">
+            <tr>
+                <td colspan="2" style="text-align: left; font-weight: 700; width: 20%; border-right: none; border-bottom: none; color: #374151;">
+                    Nº REGISTRO: <input type="text" name="NumRegistro" id="NumRegistro" style="width: 60%; text-align: left; font-weight: 700; color: var(--primary); font-size: 14px;">
+                </td>
+                <td colspan="10" style="border-left: none; border-bottom: none;"></td>
+            </tr>
+            <tr><td colspan="12" class="section-title">DATOS DEL EMPLEADOR PRINCIPAL:</td></tr>
+            <tr>
+                <th colspan="4">RAZÓN SOCIAL O DENOMINACIÓN SOCIAL</th>
+                <th colspan="2">RUC</th>
+                <th colspan="3">DOMICILIO (Dirección, distrito, dpto, prov.)</th>
+                <th colspan="2">TIPO DE ACTIVIDAD ECONÓMICA</th>
+                <th colspan="1">Nº TRABAJADORES EN EL CENTRO</th>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" name="RazonSocial" class="input-left"></td>
+                <td colspan="2"><input type="text" name="RUC"></td>
+                <td colspan="3"><input type="text" name="Domicilio" class="input-left"></td>
+                <td colspan="2"><input type="text" name="ActividadEconomica" class="input-left"></td>
+                <td colspan="1">
+                    <input type="number" name="NumTrabajadores" placeholder="Ej. 50">
+                    <span class="concepto">Total trabajadores en la sede</span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12" class="sub-section">
+                    COMPLETAR SÓLO EN CASO QUE LAS ACTIVIDADES DEL EMPLEADOR SEAN CONSIDERADAS DE ALTO RIESGO
+                </td>
+            </tr>
+            <tr>
+                <th colspan="4">N° TRABAJADORES AFILIADOS AL SCTR</th>
+                <th colspan="4">N° TRABAJADORES NO AFILIADOS AL SCTR</th>
+                <th colspan="4">NOMBRE DE LA ASEGURADORA</th>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="number" name="SCTR_Afiliados"></td>
+                <td colspan="4"><input type="number" name="SCTR_NoAfiliados"></td>
+                <td colspan="4"><input type="text" name="Aseguradora" placeholder="Ej. PACIFICO-RIMAC"></td>
+            </tr>
+        </table>
+
+        <!-- 2. DATOS DEL EMPLEADOR DE INTERMEDIACIÓN -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">DATOS DEL EMPLEADOR DE INTERMEDIACIÓN, TERCERIZACIÓN, CONTRATISTA, SUBCONTRATISTA, OTROS:</td></tr>
+            <tr>
+                <th colspan="4">RAZÓN SOCIAL O DENOMINACIÓN SOCIAL</th>
+                <th colspan="2">RUC</th>
+                <th colspan="3">DOMICILIO (Dirección, distrito, dpto, prov.)</th>
+                <th colspan="2">TIPO DE ACTIVIDAD ECONÓMICA</th>
+                <th colspan="1">Nº TRABAJADORES EN EL CENTRO</th>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" name="Contratista_RazonSocial" class="input-left"></td>
+                <td colspan="2"><input type="text" name="Contratista_RUC"></td>
+                <td colspan="3"><input type="text" name="Contratista_Domicilio" class="input-left"></td>
+                <td colspan="2"><input type="text" name="Contratista_Actividad" class="input-left"></td>
+                <td colspan="1"><input type="number" name="Contratista_NumTrabajadores"></td>
+            </tr>
+            <tr>
+                <td colspan="12" class="sub-section">
+                    COMPLETAR SÓLO EN CASO QUE LAS ACTIVIDADES DEL EMPLEADOR SEAN CONSIDERADAS DE ALTO RIESGO
+                </td>
+            </tr>
+            <tr>
+                <th colspan="4">N° TRABAJADORES AFILIADOS AL SCTR</th>
+                <th colspan="4">N° TRABAJADORES NO AFILIADOS AL SCTR</th>
+                <th colspan="4">NOMBRE DE LA ASEGURADORA</th>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="number" name="Contratista_SCTR_Afiliados"></td>
+                <td colspan="4"><input type="number" name="Contratista_SCTR_NoAfiliados"></td>
+                <td colspan="4"><input type="text" name="Contratista_Aseguradora"></td>
+            </tr>
+        </table>
+
+        <!-- 3. DATOS DEL TRABAJADOR -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">DATOS DEL TRABAJADOR ACCIDENTADO:</td></tr>
+            <tr>
+                <th colspan="6">APELLIDOS Y NOMBRES DEL TRABAJADOR ACCIDENTADO:</th>
+                <th colspan="3">Nº DNI/CE</th>
+                <th colspan="3">EDAD</th>
+            </tr>
+            <tr>
+                <td colspan="6"><input type="text" name="ApellidosNombres" class="input-left"></td>
+                <td colspan="3"><input type="text" name="DNI"></td>
+                <td colspan="3"><input type="number" name="Edad"></td>
+            </tr>
+            <tr>
+                <th colspan="2">ÁREA</th>
+                <th colspan="2">PUESTO DE TRABAJO</th>
+                <th colspan="2">ANTIGÜEDAD EN EL EMPLEO</th>
+                <th>SEXO<br>F/M</th>
+                <th>TURNO<br>D/T/N</th>
+                <th colspan="2">TIPO DE CONTRATO</th>
+                <th colspan="2">TIEMPO DE EXPERIENCIA EN EL PUESTO</th>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="text" name="Area"></td>
+                <td colspan="2"><input type="text" name="Puesto"></td>
+                <td colspan="2"><input type="text" name="Antiguedad"></td>
+                <td><input type="text" name="Sexo" maxlength="1"></td>
+                <td><input type="text" name="Turno" maxlength="1"></td>
+                <td colspan="2"><input type="text" name="TipoContrato"></td>
+                <td colspan="2"><input type="text" name="Experiencia" placeholder="Ej. 3 AÑOS"></td>
+            </tr>
+            <tr>
+                <th colspan="12">N° HORAS TRABAJADAS EN LA JORNADA LABORAL (Antes del accidente)</th>
+            </tr>
+            <tr>
+                <td colspan="12"><input type="number" name="HorasTrabajadas"></td>
+            </tr>
+        </table>
+
+        <!-- 4. INVESTIGACIÓN -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">INVESTIGACIÓN DEL ACCIDENTE DE TRABAJO</td></tr>
+            <tr>
+                <th colspan="4">FECHA Y HORA DE OCURRENCIA DEL ACCIDENTE</th>
+                <th colspan="4">FECHA DE INICIO DE LA INVESTIGACIÓN</th>
+                <th colspan="4">LUGAR EXACTO DONDE OCURRIÓ EL ACCIDENTE</th>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <input type="date" name="FechaAccidente" style="width: 55%;"> 
+                    <input type="time" name="HoraAccidente" style="width: 40%;">
+                </td>
+                <td colspan="4"><input type="date" name="FechaInvestigacion"></td>
+                <td colspan="4"><input type="text" name="LugarExacto" class="input-left"></td>
+            </tr>
+            <tr>
+                <th colspan="4">GRAVEDAD DEL ACCIDENTE DE TRABAJO</th>
+                <th colspan="4">GRADO DEL ACCIDENTE INCAPACITANTE (DE SER EL CASO)</th>
+                <th colspan="2">Nº DÍAS DE DESCANSO MÉDICO</th>
+                <th colspan="2">Nº DE TRABAJADORES AFECTADOS</th>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: left; padding-left: 15px;">
+                    <label><input type="radio" name="Gravedad" value="Leve"> LEVE</label> &nbsp;&nbsp;
+                    <label><input type="radio" name="Gravedad" value="Incapacitante"> INCAPACITANTE</label> &nbsp;&nbsp;
+                    <label><input type="radio" name="Gravedad" value="Mortal"> MORTAL</label>
+                </td>
+                <td colspan="4" style="text-align: left; padding-left: 15px;">
+                    <label><input type="checkbox" name="TotalTemporal" value="Sí"> TOTAL TEMPORAL</label> &nbsp;&nbsp;
+                    <label><input type="checkbox" name="ParcialTemporal" value="Sí"> PARCIAL TEMPORAL</label><br>
+                    <label><input type="checkbox" name="ParcialPermanente" value="Sí"> PARCIAL PERMANENTE</label> &nbsp;&nbsp;
+                    <label><input type="checkbox" name="TotalPermanente" value="Sí"> TOTAL PERMANENTE</label>
+                </td>
+                <td colspan="2"><input type="number" name="DiasDescanso"></td>
+                <td colspan="2"><input type="number" name="TrabajadoresAfectados"></td>
+            </tr>
+            <tr>
+                <th colspan="12">DESCRIBIR PARTE DEL CUERPO LESIONADO (De ser el caso):</th>
+            </tr>
+            <tr>
+                <td colspan="12"><input type="text" name="ParteCuerpo" class="input-left"></td>
+            </tr>
+        </table>
+
+        <!-- 5. DESCRIPCIÓN -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">DESCRIPCIÓN DEL ACCIDENTE DE TRABAJO</td></tr>
+            <tr>
+                <td colspan="12" style="text-align: left; padding: 10px;">
+                    <span style="font-size: 10px; color: #555; display: block; margin-bottom: 5px; font-weight: 500;">
+                        Describa sólo los hechos, no escriba información subjetiva que no pueda ser comprobada. Adjuntar: Declaración del afectado, Declaración de testigos, Procedimientos, planos, registros, entre otros que ayuden a la investigación de ser el caso.
+                    </span>
+                    <textarea name="Descripcion" placeholder="Escriba aquí el relato cronológico del accidente..."></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 6. CAUSAS -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">DESCRIPCIÓN DE LAS CAUSAS QUE ORIGINARON EL ACCIDENTE DE TRABAJO</td></tr>
+            <tr>
+                <td colspan="12" style="text-align: left; padding: 10px;">
+                    <span style="font-size: 10px; color: #555; display: block; margin-bottom: 5px; font-weight: 500;">
+                        Cada empresa o entidad pública o privada, puede adoptar el modelo de determinación de causas, que mejor se adapte a sus características y debe adjuntar al presente formato el desarrollo de la misma (Ej. Causas Inmediatas, Básicas, Fallas de Control).
+                    </span>
+                    <textarea name="Causas" placeholder="Desarrolle el análisis de causas aquí..."></textarea>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 7. MEDIDAS CORRECTIVAS -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">MEDIDAS CORRECTIVAS</td></tr>
+            <tr>
+                <th colspan="4">DESCRIPCIÓN DE LA MEDIDA CORRECTIVA</th>
+                <th colspan="3">RESPONSABLE</th>
+                <th colspan="3">FECHA DE EJECUCIÓN</th>
+                <th colspan="2">ESTADO DE IMPLEMENTACIÓN</th>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" name="Medida1_Desc" class="input-left"></td>
+                <td colspan="3"><input type="text" name="Medida1_Resp"></td>
+                <td colspan="3"><input type="date" name="Medida1_Fecha"></td>
+                <td colspan="2"><input type="text" name="Medida1_Estado" placeholder="Pendiente/Realizada"></td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="text" name="Medida2_Desc" class="input-left"></td>
+                <td colspan="3"><input type="text" name="Medida2_Resp"></td>
+                <td colspan="3"><input type="date" name="Medida2_Fecha"></td>
+                <td colspan="2"><input type="text" name="Medida2_Estado" placeholder="Pendiente/Realizada"></td>
+            </tr>
+        </table>
+
+        <!-- 8. RESPONSABLES -->
+        <table class="excel-table">
+            <tr><td colspan="12" class="section-title">RESPONSABLES DEL REGISTRO Y DE LA INVESTIGACIÓN</td></tr>
+            <tr>
+                <th colspan="5">NOMBRE Y APELLIDOS</th>
+                <th colspan="4">CARGO</th>
+                <th colspan="2">FECHA</th>
+                <th colspan="1">FIRMA</th>
+            </tr>
+            <tr>
+                <td colspan="5"><input type="text" name="Responsable1_Nombre" class="input-left"></td>
+                <td colspan="4"><input type="text" name="Responsable1_Cargo"></td>
+                <td colspan="2"><input type="date" name="Responsable1_Fecha"></td>
+                <td colspan="1"></td>
+            </tr>
+            <tr>
+                <td colspan="5"><input type="text" name="Responsable2_Nombre" class="input-left"></td>
+                <td colspan="4"><input type="text" name="Responsable2_Cargo"></td>
+                <td colspan="2"><input type="date" name="Responsable2_Fecha"></td>
+                <td colspan="1"></td>
+            </tr>
+        </table>
+
+        <!-- BOTONES PRINCIPALES -->
         <div class="btn-container">
-            <button type="submit" class="btn btn-save">💾 Guardar / Actualizar</button>
-            <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
-            <button type="button" class="btn btn-clear" onclick="limpiarFormulario()">🗑️ Limpiar Formulario</button>
+            <button type="submit" class="btn btn-save" id="btnGuardar">
+                <i class="fas fa-save"></i> Guardar / Actualizar
+            </button>
+            <button type="button" class="btn btn-print" onclick="window.print()">
+                <i class="fas fa-file-pdf"></i> Imprimir PDF
+            </button>
+            <button type="button" class="btn btn-clear" onclick="limpiarFormulario()">
+                <i class="fas fa-eraser"></i> Limpiar Formulario
+            </button>
         </div>
     </form>
+
+    <!-- SECCIÓN DE HISTORIAL ELEGANTE -->
+    <div class="admin-section">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title"><i class="fas fa-history"></i> Historial de Registros</h2>
+                <button type="button" class="btn btn-update" onclick="cargarTabla()" style="padding: 8px 16px; font-size: 12px;">
+                    <i class="fas fa-sync-alt"></i> Actualizar Tabla
+                </button>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="admin-table" id="tablaRegistros">
+                    <thead>
+                        <tr>
+                            <th>Nº Registro</th>
+                            <th>Fecha Accidente</th>
+                            <th>Trabajador Accidentado</th>
+                            <th>Gravedad</th>
+                            <th style="text-align: center;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyRegistros">
+                        <tr><td colspan="5" class="empty-msg">Haz clic en "Actualizar Tabla" para cargar los datos...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
+<!-- LÓGICA JAVASCRIPT -->
 <script>
-    // ⚠️ URL DE GOOGLE APPS SCRIPT (Ya configurada con la tuya)
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNNI3giVCvpbfxak42Q8TBl68V7ZdNBN-q0_VGrzqxVmpfWYFpXnReAYysPWKLsn4PHg/exec';
-
+    // ⚠️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyRwBy95C-koQwaVmYRHieLEb5Z5JEwOcrsOWEdTCnyfXczstqRdJBBrQ41js5VkwZmZQ/exec';
     const form = document.getElementById('formAccidente');
 
-    // Manejar el envío del formulario
+    document.addEventListener('DOMContentLoaded', cargarTabla);
+
+    function cargarTabla() {
+        const tbody = document.getElementById('tbodyRegistros');
+        tbody.innerHTML = '<tr><td colspan="5" class="empty-msg"><i class="fas fa-spinner fa-spin"></i> Cargando datos...</td></tr>';
+        
+        fetch(scriptURL + '?action=getData')
+        .then(res => res.json())
+        .then(data => {
+            tbody.innerHTML = '';
+            if (data.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="5" class="empty-msg">No hay registros guardados aún.</td></tr>';
+                return;
+            }
+            data.reverse().forEach(row => {
+                const tr = document.createElement('tr');
+                
+                // Formatear la gravedad con colores
+                let gravedadHTML = row.Gravedad || '-';
+                if(row.Gravedad === 'Mortal') gravedadHTML = '<span style="color: #ef4444; font-weight: 600;">Mortal</span>';
+                if(row.Gravedad === 'Incapacitante') gravedadHTML = '<span style="color: #f59e0b; font-weight: 600;">Incapacitante</span>';
+                if(row.Gravedad === 'Leve') gravedadHTML = '<span style="color: #10b981; font-weight: 600;">Leve</span>';
+
+                tr.innerHTML = `
+                    <td style="font-weight: 700; color: #3b82f6;">${row.NumRegistro || '-'}</td>
+                    <td style="font-weight: 500;">${row.FechaAccidente || '-'}</td>
+                    <td style="font-weight: 500;">${row.ApellidosNombres || '-'}</td>
+                    <td>${gravedadHTML}</td>
+                    <td>
+                        <div class="action-btns">
+                            <button class="btn-action btn-edit" onclick='cargarParaEditar(${JSON.stringify(row).replace(/'/g, "&#39;")})' title="Editar Registro">
+                                <i class="fas fa-pen"></i> Editar
+                            </button>
+                            <button class="btn-action btn-del" onclick="eliminarRegistro('${row.NumRegistro}')" title="Eliminar Registro">
+                                <i class="fas fa-trash-alt"></i> Eliminar
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        })
+        .catch(err => {
+            tbody.innerHTML = '<tr><td colspan="5" class="empty-msg" style="color: #ef4444;">Error al cargar datos.</td></tr>';
+        });
+    }
+
     form.addEventListener('submit', e => {
         e.preventDefault(); 
-        
-        // Validación básica: que pongan el Nº de Registro
         const numReg = document.getElementById('NumRegistro').value;
-        if (!numReg) {
-            alert('Por favor, ingresa un Nº de Registro (Ej. 001) para poder guardar o editar.');
-            return;
-        }
+        if (!numReg) return alert('Por favor, ingresa un Nº de Registro (Ej. 001).');
 
-        const btnSave = document.querySelector('.btn-save');
-        const textoOriginal = btnSave.innerText;
-        btnSave.innerText = '⏳ Procesando...';
-        btnSave.disabled = true;
+        const btnGuardar = document.getElementById('btnGuardar');
+        const originalHTML = btnGuardar.innerHTML;
+        btnGuardar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+        btnGuardar.disabled = true;
 
-        // Enviar datos a Google Sheets
-        fetch(scriptURL, {
-            method: 'POST',
-            body: new FormData(form)
-        })
-        .then(response => response.json()) // Convertir respuesta a JSON
+        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => response.json())
         .then(data => {
-            if (data.result === 'updated') {
-                alert('✅ ¡Registro EDITADO correctamente en Google Sheets!');
-            } else if (data.result === 'created') {
-                alert('✅ ¡Nuevo registro GUARDADO correctamente en Google Sheets!');
-            } else {
-                alert('⚠️ Hubo un problema: ' + JSON.stringify(data));
-            }
+            if (data.result === 'updated') alert('✅ ¡Registro EDITADO correctamente!');
+            else if (data.result === 'created') alert('✅ ¡Nuevo registro GUARDADO correctamente!');
+            else alert('⚠️ Hubo un problema: ' + JSON.stringify(data));
             
-            // Opcional: Descomenta la siguiente línea si quieres que el formulario se borre solo después de guardar
-            // form.reset(); 
-            
-            btnSave.innerText = textoOriginal;
-            btnSave.disabled = false;
+            btnGuardar.innerHTML = originalHTML;
+            btnGuardar.disabled = false;
+            cargarTabla(); 
         })
         .catch(error => {
             alert('❌ Error de conexión: ' + error.message);
-            btnSave.innerText = textoOriginal;
-            btnSave.disabled = false;
+            btnGuardar.innerHTML = originalHTML;
+            btnGuardar.disabled = false;
         });
     });
 
-    // Función para el botón de Limpiar
+    function cargarParaEditar(row) {
+        for (let key in row) {
+            const input = form.elements[key];
+            if (input) {
+                if (input.type === 'radio') {
+                    if (input.value === row[key]) input.checked = true;
+                } else if (input.type === 'checkbox') {
+                    input.checked = (row[key] === 'Sí');
+                } else {
+                    input.value = row[key];
+                }
+            }
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function eliminarRegistro(numRegistro) {
+        if(!numRegistro || numRegistro === 'undefined') return alert('Nº de registro inválido.');
+        if (confirm('¿Estás seguro de ELIMINAR el registro Nº ' + numRegistro + '?')) {
+            const formData = new FormData();
+            formData.append('action', 'delete');
+            formData.append('NumRegistro', numRegistro);
+
+            fetch(scriptURL, { method: 'POST', body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if (data.result === 'deleted') {
+                    alert('🗑️ Registro eliminado.');
+                    cargarTabla(); 
+                } else {
+                    alert('No se pudo eliminar el registro.');
+                }
+            });
+        }
+    }
+
     function limpiarFormulario() {
-        if(confirm('¿Estás seguro de que deseas borrar todo lo escrito en el formulario?')) {
+        if(confirm('¿Borrar todo lo escrito en el formulario?')) {
             form.reset();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     }
 </script>
