@@ -428,7 +428,7 @@
 <!-- LÓGICA JAVASCRIPT -->
 <script>
     // ⚠️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (Termina en /exec)
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbynE89JEPTvOiK2icy0hQMXBEnPF2C2vYiuDAUbZknTsPrC_nc6sn7DDGNE1pla-XFqKQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbz0PAyI0b3j9P24B2amBErew-xlkQwkEaC6w-TQ-Jo8vAggrDLwesLDmfzVtCHy9xTl2w/exec';
     
     const form = document.getElementById('formAccidente');
 
