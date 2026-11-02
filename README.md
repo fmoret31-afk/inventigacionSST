@@ -174,7 +174,7 @@
 
 <script>
     // ⚠️ URL DE GOOGLE APPS SCRIPT (Ya configurada con la tuya)
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyRwBy95C-koQwaVmYRHieLEb5Z5JEwOcrsOWEdTCnyfXczstqRdJBBrQ41js5VkwZmZQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxNNI3giVCvpbfxak42Q8TBl68V7ZdNBN-q0_VGrzqxVmpfWYFpXnReAYysPWKLsn4PHg/exec';
 
     const form = document.getElementById('formAccidente');
 
