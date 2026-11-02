@@ -446,7 +446,7 @@
 <!-- LÓGICA JAVASCRIPT -->
 <script>
     // ⚠️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbyRwBy95C-koQwaVmYRHieLEb5Z5JEwOcrsOWEdTCnyfXczstqRdJBBrQ41js5VkwZmZQ/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbzjs7X5ABLSH8iedDeqqJTJEQpq9WJPO8cdUKg-h7_AKM7HOcLSL9nlmlR2LPA9ts6Inw/exec';
     const form = document.getElementById('formAccidente');
 
     document.addEventListener('DOMContentLoaded', cargarTabla);
