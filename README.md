@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Accidentes - RM 050-2013-TR</title>
-    <!-- Fuentes e Iconos -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,19 +15,17 @@
             --primary: #2563eb;
             --success: #10b981;
             --danger: #ef4444;
-            --warning: #f59e0b;
             --info: #0ea5e9;
             --dark: #1e293b;
             --gray: #64748b;
             --bg-body: #f1f5f9;
-            --border-color: #cbd5e1;
+            --border-color: #94a3b8;
             --input-bg: #f8fafc;
         }
 
-        /* DISEÑO FULL WIDTH Y TIPOGRAFÍA */
         body { 
             font-family: 'Inter', sans-serif; 
-            font-size: 13px; 
+            font-size: 11px; 
             margin: 0; 
             padding: 20px; 
             background-color: var(--bg-body); 
@@ -35,111 +33,137 @@
             -webkit-font-smoothing: antialiased;
         }
         
-        /* CONTENEDOR PRINCIPAL (Usa casi toda la pantalla) */
         .container { 
-            width: 98%; 
-            max-width: 1600px; 
+            width: 100%; 
+            max-width: 1300px; 
             margin: 0 auto; 
             background-color: #fff; 
-            padding: 30px; 
+            padding: 25px; 
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1); 
             border-radius: 12px;
         }
         
-        /* TABLAS SIMÉTRICAS */
-        .excel-table { width: 100%; border-collapse: collapse; margin-bottom: -1px; table-layout: fixed; border: 1px solid var(--border-color); }
-        .excel-table th, .excel-table td { border: 1px solid var(--border-color); padding: 8px; vertical-align: middle; text-align: center; }
+        /* TABLAS */
+        .excel-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-bottom: -1px; 
+            table-layout: fixed; 
+            border: 1px solid var(--border-color); 
+        }
+        .excel-table th, .excel-table td { 
+            border: 1px solid var(--border-color); 
+            padding: 4px; 
+            vertical-align: middle; 
+            text-align: center; 
+            word-wrap: break-word;
+        }
         
         /* CABECERAS */
-        .excel-table th { background-color: #f1f5f9; font-weight: 600; font-size: 11px; text-transform: uppercase; color: #475569; letter-spacing: 0.5px;}
-        .section-title { background-color: var(--dark) !important; color: #fff !important; font-weight: 600; text-align: left !important; font-size: 12px; padding: 10px 15px !important; }
-        .sub-section { background-color: #f8fafc !important; font-size: 10px; font-weight: 600; text-align: left !important; padding: 6px 15px !important; color: var(--gray); }
+        .excel-table th { background-color: #e2e8f0; font-weight: 700; font-size: 9px; text-transform: uppercase; color: #334155; letter-spacing: 0.3px;}
+        .section-title { background-color: var(--dark) !important; color: #fff !important; font-weight: 600; text-align: left !important; font-size: 10px; padding: 6px 10px !important; letter-spacing: 0.5px;}
+        .sub-section { background-color: #f1f5f9 !important; font-size: 8px; font-weight: 600; text-align: left !important; padding: 4px 10px !important; color: var(--gray); }
         
-        /* CAJONES DE TEXTO SIMÉTRICOS Y CON BORDES */
+        /* CAJONES DE TEXTO */
         input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select {
             width: 100%; 
-            border: 1px solid var(--border-color); 
+            border: 1px solid transparent; 
             background: var(--input-bg); 
             font-family: 'Inter', sans-serif; 
-            font-size: 13px; 
+            font-size: 11px; 
             font-weight: 500; 
             box-sizing: border-box; 
             text-align: center; 
-            padding: 8px; 
-            border-radius: 6px;
+            padding: 4px; 
+            border-radius: 4px;
             color: var(--dark);
             transition: all 0.2s ease;
+            display: block;
         }
 
         input:focus, textarea:focus, select:focus { 
             outline: none; 
             border-color: var(--primary); 
             background-color: #fff; 
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15); 
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15); 
         }
 
-        textarea { text-align: left; resize: vertical; min-height: 90px; line-height: 1.5; font-weight: 400;}
-        .input-left { text-align: left !important; }
+        textarea { 
+            text-align: left; 
+            resize: vertical; 
+            min-height: 70px; 
+            line-height: 1.4; 
+            font-weight: 400;
+            width: 100% !important;
+            border: 1px solid var(--border-color);
+        }
         
-        /* TEXTOS DE AYUDA */
-        .concepto { font-size: 9px; color: var(--gray); font-style: italic; display: block; margin-top: 4px; text-align: left; font-weight: 400;}
+        .input-left { text-align: left !important; padding-left: 6px;}
+        .concepto { font-size: 8px; color: var(--gray); font-style: italic; display: block; margin-top: 3px; text-align: left; font-weight: 400;}
+
+        /* 🔥 NUEVA CLASE PARA HACER MÁS PEQUEÑOS LOS CHECKBOX Y TEXTOS 🔥 */
+        .label-checkbox {
+            display: inline-flex;
+            align-items: center;
+            font-size: 9px; /* Letra más pequeña */
+            font-weight: 600;
+            color: #334155;
+            margin-right: 8px;
+            margin-bottom: 2px;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .label-checkbox input {
+            width: 12px;
+            height: 12px;
+            margin: 0 4px 0 0; /* Espacio entre el cuadro y el texto */
+            cursor: pointer;
+        }
 
         /* BOTONES */
-        .btn-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 35px 0; }
-        
+        .btn-container { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; margin: 25px 0; }
         .btn { 
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px 28px; font-size: 14px; font-weight: 600; cursor: pointer; 
-            border: none; border-radius: 8px; color: white; transition: all 0.3s ease;
-            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); font-family: 'Inter', sans-serif;
+            display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+            padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer; 
+            border: none; border-radius: 6px; color: white; transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1); font-family: 'Inter', sans-serif;
         }
-        .btn i { font-size: 16px; }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 12px -2px rgba(0,0,0,0.15); filter: brightness(1.05); }
-        
+        .btn i { font-size: 14px; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.15); filter: brightness(1.05); }
         .btn-save { background-color: var(--success); }
         .btn-print { background-color: var(--primary); }
         .btn-clear { background-color: var(--danger); }
         .btn-update { background-color: var(--info); }
 
-        /* DISEÑO DEL HISTORIAL */
-        .admin-section { margin-top: 50px; }
-        
-        .card { background: #ffffff; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); overflow: hidden; border: 1px solid var(--border-color); }
-
-        .card-header { background-color: #f8fafc; padding: 20px 25px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
-        .card-title { margin: 0; font-size: 18px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 10px; }
+        /* HISTORIAL */
+        .admin-section { margin-top: 40px; }
+        .card { background: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); overflow: hidden; border: 1px solid var(--border-color); }
+        .card-header { background-color: #f8fafc; padding: 15px 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { margin: 0; font-size: 16px; font-weight: 700; color: var(--dark); display: flex; align-items: center; gap: 8px; }
         .card-title i { color: var(--primary); }
-
-        .table-responsive { overflow-x: auto; padding: 20px 25px; }
-
-        .admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-        .admin-table th, .admin-table td { padding: 14px 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
-        
-        .admin-table th { background-color: #f1f5f9; color: #475569; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
-        .admin-table tbody tr { transition: background-color 0.2s ease; }
+        .table-responsive { overflow-x: auto; padding: 15px 20px; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .admin-table th, .admin-table td { padding: 10px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        .admin-table th { background-color: #f1f5f9; color: #475569; font-weight: 600; text-transform: uppercase; font-size: 10px; }
         .admin-table tbody tr:hover { background-color: #f8fafc; }
-
-        .action-btns { display: flex; gap: 8px; justify-content: center; }
-        .btn-action {
-            display: inline-flex; align-items: center; gap: 6px;
-            padding: 8px 16px; font-size: 12px; font-weight: 600; border: none; border-radius: 6px; cursor: pointer; transition: 0.2s; font-family: 'Inter', sans-serif;
-        }
+        .action-btns { display: flex; gap: 6px; justify-content: center; }
+        .btn-action { display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; font-size: 11px; font-weight: 600; border: none; border-radius: 4px; cursor: pointer; transition: 0.2s; }
         .btn-edit { background-color: #fef3c7; color: #b45309; }
-        .btn-edit:hover { background-color: #fde68a; }
         .btn-del { background-color: #fee2e2; color: #b91c1c; }
-        .btn-del:hover { background-color: #fecaca; }
+        .empty-msg { text-align: center; color: var(--gray); font-style: italic; padding: 20px; }
 
-        .empty-msg { text-align: center; color: var(--gray); font-style: italic; padding: 30px; font-weight: 500;}
-
-        /* IMPRESIÓN */
+        /* IMPRESIÓN A4 */
         @media print {
-            body { background-color: #fff; padding: 0; }
-            .container { box-shadow: none; padding: 0; max-width: 100%; width: 100%;}
-            .btn-container, .admin-section { display: none; }
-            .concepto { display: none; }
-            input, textarea, select { border: 1px solid #000; background: transparent; }
+            @page { size: A4 portrait; margin: 8mm; }
+            body { background-color: #fff; padding: 0; margin: 0; font-size: 10px; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; width: 100%; border: none; }
+            .btn-container, .admin-section, .concepto { display: none !important; }
+            .excel-table { page-break-inside: avoid; width: 100% !important; margin-bottom: 2px;}
+            textarea { border: 1px solid #000 !important; background: transparent !important; min-height: 80px !important; page-break-inside: avoid; }
+            input, select { border: none !important; background: transparent !important; }
             .section-title { background-color: #e2e8f0 !important; color: #000 !important; border: 1px solid #000; -webkit-print-color-adjust: exact; }
-            .excel-table th { background-color: #f1f5f9 !important; color: #000 !important; -webkit-print-color-adjust: exact; }
+            .excel-table th { background-color: #f1f5f9 !important; color: #000 !important; border: 1px solid #000; -webkit-print-color-adjust: exact; }
+            .label-checkbox { color: #000; font-size: 8.5px;}
         }
     </style>
 </head>
@@ -151,26 +175,24 @@
         <!-- ENCABEZADO -->
         <table class="excel-table" style="border: none;">
             <tr>
-                <td colspan="12" style="border: none; text-align: center; padding-bottom: 20px;">
-                    <h2 style="margin: 0; font-size: 22px; font-weight: 700; color: var(--dark);">REGISTRO DE ACCIDENTES DE TRABAJO</h2>
-                    <p style="margin: 5px 0 0 0; font-size: 12px; color: var(--gray);">Formato RM 050-2013-TR</p>
+                <td style="text-align: left; font-weight: 700; border: none; width: 30%; font-size: 12px;">
+                    Nº REGISTRO: <input type="text" name="NumRegistro" id="NumRegistro" style="width: 100px; text-align: center; font-weight: 700; color: var(--primary); border-color: var(--border-color); display:inline-block;">
                 </td>
+                <td colspan="9" style="border: none; text-align: center;">
+                    <h2 style="margin: 0; font-size: 18px; font-weight: 700; text-transform: uppercase;">REGISTRO DE ACCIDENTES DE TRABAJO</h2>
+                    <span style="font-size: 10px; color: var(--gray);">Formato RM 050-2013-TR</span>
+                </td>
+                <td style="border: none; width: 30%;"></td>
             </tr>
         </table>
 
-        <!-- DATOS DEL EMPLEADOR -->
+        <!-- 1. DATOS DEL EMPLEADOR -->
         <table class="excel-table">
-            <tr>
-                <td colspan="3" style="text-align: left; font-weight: 700; border-bottom: none; font-size: 14px; color: var(--primary);">
-                    Nº REGISTRO: <input type="text" name="NumRegistro" id="NumRegistro" style="width: 150px; text-align: center; font-weight: 700; color: var(--primary); border-color: var(--primary);">
-                </td>
-                <td colspan="9" style="border-bottom: none;"></td>
-            </tr>
             <tr><td colspan="12" class="section-title">DATOS DEL EMPLEADOR PRINCIPAL</td></tr>
             <tr>
                 <th colspan="4">RAZÓN SOCIAL O DENOMINACIÓN</th>
                 <th colspan="2">RUC</th>
-                <th colspan="3">DOMICILIO (Dirección, distrito, dpto)</th>
+                <th colspan="3">DOMICILIO</th>
                 <th colspan="2">ACTIVIDAD ECONÓMICA</th>
                 <th colspan="1">Nº TRABAJADORES</th>
             </tr>
@@ -180,15 +202,11 @@
                 <td colspan="3"><input type="text" name="Domicilio" class="input-left"></td>
                 <td colspan="2"><input type="text" name="ActividadEconomica" class="input-left"></td>
                 <td colspan="1">
-                    <input type="number" name="NumTrabajadores" placeholder="Ej. 50">
+                    <input type="number" name="NumTrabajadores">
                     <span class="concepto">Total en la sede</span>
                 </td>
             </tr>
-            <tr>
-                <td colspan="12" class="sub-section">
-                    COMPLETAR SÓLO EN CASO DE ALTO RIESGO
-                </td>
-            </tr>
+            <tr><td colspan="12" class="sub-section">COMPLETAR SÓLO EN CASO DE ALTO RIESGO</td></tr>
             <tr>
                 <th colspan="4">AFILIADOS AL SCTR</th>
                 <th colspan="4">NO AFILIADOS AL SCTR</th>
@@ -201,7 +219,7 @@
             </tr>
         </table>
 
-        <!-- EMPLEADOR DE INTERMEDIACIÓN -->
+        <!-- 2. EMPLEADOR DE INTERMEDIACIÓN -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">DATOS DEL EMPLEADOR DE INTERMEDIACIÓN / CONTRATISTA</td></tr>
             <tr>
@@ -218,9 +236,7 @@
                 <td colspan="2"><input type="text" name="Contratista_Actividad" class="input-left"></td>
                 <td colspan="1"><input type="number" name="Contratista_NumTrabajadores"></td>
             </tr>
-            <tr>
-                <td colspan="12" class="sub-section">COMPLETAR SÓLO EN CASO DE ALTO RIESGO</td>
-            </tr>
+            <tr><td colspan="12" class="sub-section">COMPLETAR SÓLO EN CASO DE ALTO RIESGO</td></tr>
             <tr>
                 <th colspan="4">AFILIADOS AL SCTR</th>
                 <th colspan="4">NO AFILIADOS AL SCTR</th>
@@ -233,7 +249,7 @@
             </tr>
         </table>
 
-        <!-- DATOS DEL TRABAJADOR -->
+        <!-- 3. DATOS DEL TRABAJADOR -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">DATOS DEL TRABAJADOR ACCIDENTADO</td></tr>
             <tr>
@@ -272,7 +288,7 @@
             </tr>
         </table>
 
-        <!-- INVESTIGACIÓN -->
+        <!-- 4. INVESTIGACIÓN (AQUÍ ESTÁ LA CORRECCIÓN DE LAS LETRAS) -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">INVESTIGACIÓN DEL ACCIDENTE DE TRABAJO</td></tr>
             <tr>
@@ -282,10 +298,10 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <input type="date" name="FechaAccidente" style="width: 50%; border:none; background:transparent; border-bottom: 1px solid #ccc; border-radius:0;"> 
-                    <input type="time" name="HoraAccidente" style="width: 40%; border:none; background:transparent; border-bottom: 1px solid #ccc; border-radius:0;">
+                    <input type="date" name="FechaAccidente" style="width: 55%; display:inline-block;"> 
+                    <input type="time" name="HoraAccidente" style="width: 40%; display:inline-block;">
                 </td>
-                <td colspan="4"><input type="date" name="FechaInvestigacion" style="border:none; background:transparent; border-bottom: 1px solid #ccc; border-radius:0;"></td>
+                <td colspan="4"><input type="date" name="FechaInvestigacion"></td>
                 <td colspan="4"><input type="text" name="LugarExacto" class="input-left"></td>
             </tr>
             <tr>
@@ -295,16 +311,17 @@
                 <th colspan="2">TRABAJADORES AFECTADOS</th>
             </tr>
             <tr>
-                <td colspan="4" style="text-align: left; padding-left: 15px;">
-                    <label style="display:inline-block; margin-right: 10px;"><input type="radio" name="Gravedad" value="Leve"> LEVE</label>
-                    <label style="display:inline-block; margin-right: 10px;"><input type="radio" name="Gravedad" value="Incapacitante"> INCAPACITANTE</label>
-                    <label style="display:inline-block;"><input type="radio" name="Gravedad" value="Mortal"> MORTAL</label>
+                <!-- SE APLICÓ LA CLASE label-checkbox PARA REDUCIR EL TAMAÑO -->
+                <td colspan="4" style="text-align: left; padding-left: 8px;">
+                    <label class="label-checkbox"><input type="radio" name="Gravedad" value="Leve"> LEVE</label>
+                    <label class="label-checkbox"><input type="radio" name="Gravedad" value="Incapacitante"> INCAPACITANTE</label>
+                    <label class="label-checkbox"><input type="radio" name="Gravedad" value="Mortal"> MORTAL</label>
                 </td>
-                <td colspan="4" style="text-align: left; padding-left: 15px;">
-                    <label><input type="checkbox" name="TotalTemporal" value="Sí"> TOTAL TEMPORAL</label> &nbsp;
-                    <label><input type="checkbox" name="ParcialTemporal" value="Sí"> PARCIAL TEMPORAL</label><br>
-                    <label><input type="checkbox" name="ParcialPermanente" value="Sí"> PARCIAL PERMANENTE</label> &nbsp;
-                    <label><input type="checkbox" name="TotalPermanente" value="Sí"> TOTAL PERMANENTE</label>
+                <td colspan="4" style="text-align: left; padding-left: 8px;">
+                    <label class="label-checkbox"><input type="checkbox" name="TotalTemporal" value="Sí"> TOTAL TEMPORAL</label>
+                    <label class="label-checkbox"><input type="checkbox" name="ParcialTemporal" value="Sí"> PARCIAL TEMPORAL</label>
+                    <label class="label-checkbox"><input type="checkbox" name="ParcialPermanente" value="Sí"> PARCIAL PERMANENTE</label>
+                    <label class="label-checkbox"><input type="checkbox" name="TotalPermanente" value="Sí"> TOTAL PERMANENTE</label>
                 </td>
                 <td colspan="2"><input type="number" name="DiasDescanso"></td>
                 <td colspan="2"><input type="number" name="TrabajadoresAfectados"></td>
@@ -317,28 +334,29 @@
             </tr>
         </table>
 
-        <!-- DESCRIPCIÓN Y CAUSAS -->
+        <!-- 5. DESCRIPCIÓN -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">DESCRIPCIÓN DEL ACCIDENTE</td></tr>
             <tr>
-                <td colspan="12" style="text-align: left; padding: 15px;">
-                    <span class="concepto" style="margin-bottom: 8px; font-size: 11px; color:#ef4444;"><i class="fas fa-info-circle"></i> Describa sólo los hechos comprobables. Adjuntar declaraciones y procedimientos.</span>
+                <td colspan="12" style="text-align: left; padding: 10px;">
+                    <span class="concepto" style="margin-bottom: 5px; font-size: 9px;"><i class="fas fa-info-circle"></i> Describa sólo los hechos comprobables. Adjuntar declaraciones y procedimientos.</span>
                     <textarea name="Descripcion" placeholder="Escriba aquí el relato cronológico del accidente..."></textarea>
                 </td>
             </tr>
         </table>
 
+        <!-- 6. CAUSAS -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">CAUSAS QUE ORIGINARON EL ACCIDENTE</td></tr>
             <tr>
-                <td colspan="12" style="text-align: left; padding: 15px;">
-                    <span class="concepto" style="margin-bottom: 8px; font-size: 11px; color:#ef4444;"><i class="fas fa-info-circle"></i> Use el modelo de causalidad (Inmediatas, Básicas, Fallas de Control).</span>
+                <td colspan="12" style="text-align: left; padding: 10px;">
+                    <span class="concepto" style="margin-bottom: 5px; font-size: 9px;"><i class="fas fa-info-circle"></i> Use el modelo de causalidad (Inmediatas, Básicas, Fallas de Control).</span>
                     <textarea name="Causas" placeholder="Desarrolle el análisis de causas aquí..."></textarea>
                 </td>
             </tr>
         </table>
 
-        <!-- MEDIDAS CORRECTIVAS -->
+        <!-- 7. MEDIDAS CORRECTIVAS -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">MEDIDAS CORRECTIVAS</td></tr>
             <tr>
@@ -361,7 +379,7 @@
             </tr>
         </table>
 
-        <!-- RESPONSABLES -->
+        <!-- 8. RESPONSABLES -->
         <table class="excel-table">
             <tr><td colspan="12" class="section-title">RESPONSABLES DEL REGISTRO Y LA INVESTIGACIÓN</td></tr>
             <tr>
@@ -381,7 +399,7 @@
             </tr>
         </table>
 
-        <!-- BOTONES PRINCIPALES -->
+        <!-- BOTONES -->
         <div class="btn-container">
             <button type="submit" class="btn btn-save" id="btnGuardar">
                 <i class="fas fa-save"></i> Guardar / Actualizar
@@ -390,21 +408,20 @@
                 <i class="fas fa-file-pdf"></i> Imprimir PDF
             </button>
             <button type="button" class="btn btn-clear" onclick="limpiarFormulario()">
-                <i class="fas fa-eraser"></i> Limpiar Formulario
+                <i class="fas fa-eraser"></i> Limpiar
             </button>
         </div>
     </form>
 
-    <!-- HISTORIAL ELEGANTE -->
+    <!-- HISTORIAL -->
     <div class="admin-section">
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title"><i class="fas fa-history"></i> Historial de Registros</h2>
-                <button type="button" class="btn btn-update" onclick="cargarTabla()" style="padding: 10px 20px; font-size: 13px;">
+                <button type="button" class="btn btn-update" onclick="cargarTabla()" style="padding: 8px 16px; font-size: 12px;">
                     <i class="fas fa-sync-alt"></i> Actualizar Tabla
                 </button>
             </div>
-            
             <div class="table-responsive">
                 <table class="admin-table" id="tablaRegistros">
                     <thead>
@@ -428,7 +445,7 @@
 <!-- LÓGICA JAVASCRIPT -->
 <script>
     // ⚠️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (Termina en /exec)
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbz0PAyI0b3j9P24B2amBErew-xlkQwkEaC6w-TQ-Jo8vAggrDLwesLDmfzVtCHy9xTl2w/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyRwBy95C-koQwaVmYRHieLEb5Z5JEwOcrsOWEdTCnyfXczstqRdJBBrQ41js5VkwZmZQ/exec';
     
     const form = document.getElementById('formAccidente');
 
