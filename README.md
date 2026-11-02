@@ -6,7 +6,7 @@
     <title>Registro de Accidentes - RM 050-2013-TR</title>
     <style>
         body { font-family: Arial, sans-serif; font-size: 12px; margin: 20px; color: #000; background-color: #f4f4f4;}
-        .container { max-width: 1000px; margin: 0 auto; border: 2px solid #000; padding: 15px; background-color: #fff;}
+        .container { max-width: 1000px; margin: 0 auto; border: 2px solid #000; padding: 15px; background-color: #fff; box-shadow: 0 0 10px rgba(0,0,0,0.1);}
         h1 { text-align: center; font-size: 16px; text-transform: uppercase; margin-bottom: 5px; }
         .header-top { display: flex; justify-content: space-between; margin-bottom: 15px; font-weight: bold; }
         fieldset { border: 1px solid #666; margin-bottom: 10px; padding: 10px; }
@@ -23,16 +23,18 @@
         table { width: 100%; border-collapse: collapse; margin-top: 5px; }
         th, td { border: 1px solid #000; padding: 5px; text-align: left; font-size: 11px; }
         th { background-color: #e0e0e0; text-align: center; }
-        .btn-container { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
-        .btn { padding: 10px 20px; font-size: 16px; font-weight: bold; cursor: pointer; border: none; border-radius: 5px; color: white;}
+        .btn-container { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .btn { padding: 10px 20px; font-size: 14px; font-weight: bold; cursor: pointer; border: none; border-radius: 5px; color: white; transition: 0.3s;}
         .btn-save { background-color: #4a86e8; }
         .btn-save:hover { background-color: #3b6ebf; }
         .btn-print { background-color: #28a745; }
         .btn-print:hover { background-color: #218838; }
+        .btn-clear { background-color: #dc3545; }
+        .btn-clear:hover { background-color: #c82333; }
         @media print {
             .btn-container { display: none; }
-            .container { border: none; padding: 0; }
-            body { background-color: #fff; }
+            .container { border: none; padding: 0; box-shadow: none; }
+            body { background-color: #fff; margin: 0; }
         }
     </style>
 </head>
@@ -40,7 +42,7 @@
 
 <div class="container">
     <div class="header-top">
-        <div>Nº REGISTRO: <input type="text" name="NumRegistro" style="width: 150px;"></div>
+        <div>Nº REGISTRO: <input type="text" name="NumRegistro" id="NumRegistro" style="width: 150px; font-weight: bold;" placeholder="Ej. 001"></div>
         <div>Formato RM 050-2013-TR</div>
     </div>
     <h1>REGISTRO DE ACCIDENTES DE TRABAJO</h1>
@@ -163,24 +165,33 @@
         </fieldset>
         
         <div class="btn-container">
-            <button type="submit" class="btn btn-save">💾 Guardar en Google Sheets</button>
-            <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button>
+            <button type="submit" class="btn btn-save">💾 Guardar / Actualizar</button>
+            <button type="button" class="btn btn-print" onclick="window.print()">🖨️ Imprimir / PDF</button>
+            <button type="button" class="btn btn-clear" onclick="limpiarFormulario()">🗑️ Limpiar Formulario</button>
         </div>
     </form>
 </div>
 
 <script>
-    // Tu URL de API ya está configurada aquí:
+    // ⚠️ URL DE GOOGLE APPS SCRIPT (Ya configurada con la tuya)
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyRwBy95C-koQwaVmYRHieLEb5Z5JEwOcrsOWEdTCnyfXczstqRdJBBrQ41js5VkwZmZQ/exec';
 
     const form = document.getElementById('formAccidente');
 
+    // Manejar el envío del formulario
     form.addEventListener('submit', e => {
         e.preventDefault(); 
         
+        // Validación básica: que pongan el Nº de Registro
+        const numReg = document.getElementById('NumRegistro').value;
+        if (!numReg) {
+            alert('Por favor, ingresa un Nº de Registro (Ej. 001) para poder guardar o editar.');
+            return;
+        }
+
         const btnSave = document.querySelector('.btn-save');
         const textoOriginal = btnSave.innerText;
-        btnSave.innerText = 'Guardando...';
+        btnSave.innerText = '⏳ Procesando...';
         btnSave.disabled = true;
 
         // Enviar datos a Google Sheets
@@ -188,18 +199,35 @@
             method: 'POST',
             body: new FormData(form)
         })
-        .then(response => {
-            alert('¡Datos guardados en Google Sheets correctamente!');
-            form.reset(); 
+        .then(response => response.json()) // Convertir respuesta a JSON
+        .then(data => {
+            if (data.result === 'updated') {
+                alert('✅ ¡Registro EDITADO correctamente en Google Sheets!');
+            } else if (data.result === 'created') {
+                alert('✅ ¡Nuevo registro GUARDADO correctamente en Google Sheets!');
+            } else {
+                alert('⚠️ Hubo un problema: ' + JSON.stringify(data));
+            }
+            
+            // Opcional: Descomenta la siguiente línea si quieres que el formulario se borre solo después de guardar
+            // form.reset(); 
+            
             btnSave.innerText = textoOriginal;
             btnSave.disabled = false;
         })
         .catch(error => {
-            alert('Error al guardar: ' + error.message);
+            alert('❌ Error de conexión: ' + error.message);
             btnSave.innerText = textoOriginal;
             btnSave.disabled = false;
         });
     });
+
+    // Función para el botón de Limpiar
+    function limpiarFormulario() {
+        if(confirm('¿Estás seguro de que deseas borrar todo lo escrito en el formulario?')) {
+            form.reset();
+        }
+    }
 </script>
 
 </body>
