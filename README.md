@@ -33,9 +33,10 @@
             -webkit-font-smoothing: antialiased;
         }
         
+        /* CONTENEDOR PRINCIPAL FULL WIDTH */
         .container { 
-            width: 100%; 
-            max-width: 1300px; 
+            width: 98%; 
+            max-width: 1600px; 
             margin: 0 auto; 
             background-color: #fff; 
             padding: 25px; 
@@ -43,7 +44,7 @@
             border-radius: 12px;
         }
         
-        /* TABLAS */
+        /* TABLAS BLINDADAS (table-layout: fixed + colgroup) */
         .excel-table { 
             width: 100%; 
             border-collapse: collapse; 
@@ -64,7 +65,7 @@
         .section-title { background-color: var(--dark) !important; color: #fff !important; font-weight: 600; text-align: left !important; font-size: 10px; padding: 6px 10px !important; letter-spacing: 0.5px;}
         .sub-section { background-color: #f1f5f9 !important; font-size: 8px; font-weight: 600; text-align: left !important; padding: 4px 10px !important; color: var(--gray); }
         
-        /* CAJONES DE TEXTO */
+        /* CAJONES DE TEXTO Y TEXTAREAS (Ocupan 100% del ancho de la celda) */
         input[type="text"], input[type="date"], input[type="time"], input[type="number"], textarea, select {
             width: 100%; 
             border: 1px solid transparent; 
@@ -91,7 +92,7 @@
         textarea { 
             text-align: left; 
             resize: vertical; 
-            min-height: 70px; 
+            min-height: 80px; 
             line-height: 1.4; 
             font-weight: 400;
             width: 100% !important;
@@ -101,11 +102,11 @@
         .input-left { text-align: left !important; padding-left: 6px;}
         .concepto { font-size: 8px; color: var(--gray); font-style: italic; display: block; margin-top: 3px; text-align: left; font-weight: 400;}
 
-        /* 🔥 NUEVA CLASE PARA HACER MÁS PEQUEÑOS LOS CHECKBOX Y TEXTOS 🔥 */
+        /* CHECKBOXES PEQUEÑOS */
         .label-checkbox {
             display: inline-flex;
             align-items: center;
-            font-size: 9px; /* Letra más pequeña */
+            font-size: 9px;
             font-weight: 600;
             color: #334155;
             margin-right: 8px;
@@ -116,7 +117,7 @@
         .label-checkbox input {
             width: 12px;
             height: 12px;
-            margin: 0 4px 0 0; /* Espacio entre el cuadro y el texto */
+            margin: 0 4px 0 0;
             cursor: pointer;
         }
 
@@ -174,6 +175,7 @@
         
         <!-- ENCABEZADO -->
         <table class="excel-table" style="border: none;">
+            <colgroup><col span="12"></colgroup>
             <tr>
                 <td style="text-align: left; font-weight: 700; border: none; width: 30%; font-size: 12px;">
                     Nº REGISTRO: <input type="text" name="NumRegistro" id="NumRegistro" style="width: 100px; text-align: center; font-weight: 700; color: var(--primary); border-color: var(--border-color); display:inline-block;">
@@ -188,6 +190,7 @@
 
         <!-- 1. DATOS DEL EMPLEADOR -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">DATOS DEL EMPLEADOR PRINCIPAL</td></tr>
             <tr>
                 <th colspan="4">RAZÓN SOCIAL O DENOMINACIÓN</th>
@@ -221,6 +224,7 @@
 
         <!-- 2. EMPLEADOR DE INTERMEDIACIÓN -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">DATOS DEL EMPLEADOR DE INTERMEDIACIÓN / CONTRATISTA</td></tr>
             <tr>
                 <th colspan="4">RAZÓN SOCIAL</th>
@@ -251,6 +255,7 @@
 
         <!-- 3. DATOS DEL TRABAJADOR -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">DATOS DEL TRABAJADOR ACCIDENTADO</td></tr>
             <tr>
                 <th colspan="6">APELLIDOS Y NOMBRES</th>
@@ -288,8 +293,9 @@
             </tr>
         </table>
 
-        <!-- 4. INVESTIGACIÓN (AQUÍ ESTÁ LA CORRECCIÓN DE LAS LETRAS) -->
+        <!-- 4. INVESTIGACIÓN -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">INVESTIGACIÓN DEL ACCIDENTE DE TRABAJO</td></tr>
             <tr>
                 <th colspan="4">FECHA Y HORA DEL ACCIDENTE</th>
@@ -311,7 +317,6 @@
                 <th colspan="2">TRABAJADORES AFECTADOS</th>
             </tr>
             <tr>
-                <!-- SE APLICÓ LA CLASE label-checkbox PARA REDUCIR EL TAMAÑO -->
                 <td colspan="4" style="text-align: left; padding-left: 8px;">
                     <label class="label-checkbox"><input type="radio" name="Gravedad" value="Leve"> LEVE</label>
                     <label class="label-checkbox"><input type="radio" name="Gravedad" value="Incapacitante"> INCAPACITANTE</label>
@@ -336,6 +341,7 @@
 
         <!-- 5. DESCRIPCIÓN -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">DESCRIPCIÓN DEL ACCIDENTE</td></tr>
             <tr>
                 <td colspan="12" style="text-align: left; padding: 10px;">
@@ -347,6 +353,7 @@
 
         <!-- 6. CAUSAS -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">CAUSAS QUE ORIGINARON EL ACCIDENTE</td></tr>
             <tr>
                 <td colspan="12" style="text-align: left; padding: 10px;">
@@ -358,6 +365,7 @@
 
         <!-- 7. MEDIDAS CORRECTIVAS -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">MEDIDAS CORRECTIVAS</td></tr>
             <tr>
                 <th colspan="4">DESCRIPCIÓN DE LA MEDIDA</th>
@@ -381,6 +389,7 @@
 
         <!-- 8. RESPONSABLES -->
         <table class="excel-table">
+            <colgroup><col span="12"></colgroup>
             <tr><td colspan="12" class="section-title">RESPONSABLES DEL REGISTRO Y LA INVESTIGACIÓN</td></tr>
             <tr>
                 <th colspan="5">NOMBRE Y APELLIDOS</th>
@@ -445,7 +454,7 @@
 <!-- LÓGICA JAVASCRIPT -->
 <script>
     // ⚠️ PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT (Termina en /exec)
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby6KvrktCUSNE53N7NFjymD_jWJEvqULEurGxYbHNenl65EMH8ymLczFvVXEeVLa8-2zA/exec';
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyRwBy95C-koQwaVmYRHieLEb5Z5JEwOcrsOWEdTCnyfXczstqRdJBBrQ41js5VkwZmZQ/exec';
     
     const form = document.getElementById('formAccidente');
 
